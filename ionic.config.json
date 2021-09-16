@@ -1,0 +1,7 @@
+{
+  "name": "Школа Продаж",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

@@ -1,0 +1,20 @@
+.alert-wrapper .alert-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.alert-wrapper .alert-sub-title {
+  font-size: 16px;
+  line-height: 1.4rem;
+}
+
+.alert-wrapper .alert-message {
+  display: none !important;
+}
+
+.modal-wrapper {
+  .divider {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+}

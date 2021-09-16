@@ -1,0 +1,32 @@
+<ion-content padding>
+  <div class="logo-block"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m8 offset-m2">
+        <div class="ticket">
+          <div class="ticket-title center-align">
+            Авторизация
+          </div>
+          <form (submit)="auth()">
+            <div class="input-field">
+              <i class="material-icons prefix">email</i>
+              <input [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="validate" id="email" type="email">
+              <label for="email">E-mail</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">lock</i>
+              <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" class="validate" id="password" type="password">
+              <label for="password">Пароль</label>
+            </div>
+            <div *ngIf="error" class="card card-panel red lighten-1 white-text">
+              {{ error }}
+            </div>
+            <button class="btn btn-block btn-large waves-effect waves-light blue">
+              Войти
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

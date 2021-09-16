@@ -1,0 +1,65 @@
+<ion-content padding>
+  <div class="container">
+    <div class="row">
+      <div class="col l4">
+        <list (onSelect)="homeTask = $event" [item]="homeTask" [items]="homeTasks" [title]="'Дом. задания'"></list>
+      </div>
+      <div *ngIf="homeTask" class="col m12 l8">
+        <div class="ticket">
+          <div class="ticket-title">Домашнее задание</div>
+          Урок: <b>{{ homeTask.lesson.title }}</b>
+          <hr>
+          Пользователь: <b>{{ homeTask.user.name }}</b>
+          <hr>
+          Дата отправки: <b>{{ homeTask.createdDateTime | dateFormat: '{day} {month} в {hour}:{minute}' }}</b>
+          <hr>
+          Оценка: <b>{{ homeTask.status == 'awaiting' ? 'Ждет ответа' : homeTask.assessment + ' бал.' }}</b>
+          <hr>
+          Дата ответа:
+          <b *ngIf="homeTask.status == 'awaiting'">-</b>
+          <b *ngIf="homeTask.status != 'awaiting'">{{ homeTask.assessmentDateTime | dateFormat: '{day} {month} в {hour}:{minute}' }}</b>
+        </div>
+        <div class="ticket">
+          <div class="ticket-title">Домашнее задание</div>
+          <trumbowyg [content]="homeTask.lesson.homeTask" [nl2br]="true"></trumbowyg>
+        </div>
+        <div *ngIf="homeTask.answer.length" class="ticket">
+          <div class="ticket-title">Ответ</div>
+          <trumbowyg [content]="homeTask.answer" [nl2br]="true"></trumbowyg>
+        </div>
+        <div *ngIf="homeTask.files.length" class="ticket">
+          <div class="ticket-title">Закрепленные файлы</div>
+          <a *ngFor="let file of homeTask.files" class="btn blue" href="{{ file }}" target="_blank">
+            <i class="material-icons">cloud_download</i>
+          </a>
+        </div>
+        <div *ngIf="homeTask.status == 'awaiting'" class="ticket">
+          <div class="ticket-title">Оценка</div>
+          <div class="input-field">
+            <textarea [(ngModel)]="comment"
+                      [ngModelOptions]="{standalone: true}"
+                      class="materialize-textarea"
+                      placeholder="Комментарий"></textarea>
+          </div>
+          <div class="row">
+            <div class="col s12 l6">
+              <div class="input-field">
+                <input [(ngModel)]="assessment" class="validate" id="assessment" type="number"/>
+                <label for="assessment">Оценка</label>
+              </div>
+            </div>
+            <div class="col s12 l6">
+              <a (click)="submit()" class="btn blue btn-block btn-large">
+                Отправить оценку
+              </a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="homeTask.comment" class="ticket">
+          <div class="ticket-title">Комментарий к оценке</div>
+          <trumbowyg [content]="homeTask.comment" [nl2br]="true"></trumbowyg>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

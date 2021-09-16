@@ -1,0 +1,43 @@
+<div class="nav menu blue darken-3">
+  <div class="logo"></div>
+  <ul>
+    <li>
+      <a (click)="nav.lazy('home')" class="white-text waves-effect waves-light">
+        <i class="material-icons">book</i>
+        <span class="hide-on-small-only">Дом. задания</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="nav.lazy('chat')" class="white-text waves-effect waves-light">
+        <i class="material-icons">chat</i>
+        <span class="hide-on-small-only">Чат</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="notificationVisibility = true" class="notification-badge waves-effect waves-light">
+        <i class="material-icons white-text">notifications</i>
+        <span *ngIf="notifications.length" class="new badge red">{{ notifications.length }}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div [class.active]="notificationVisibility" class="side-nav white notifications">
+  <h5 class="title blue white-text">
+    Уведомления
+    <span *ngIf="notifications.length" class="new badge white blue-text">{{ notifications.length }}</span>
+  </h5>
+  <div class="notifications-list">
+    <div *ngIf="!notifications.length" class="empty-notifications">
+      У вас нет новых уведомлений.
+    </div>
+    <div (click)="nav.notification(notification); notificationVisibility = false;" *ngFor="let notification of notifications" class="card white hoverable">
+      <div class="card-content blue-text">
+        <span class="new badge white blue-text">{{ notification.dateTime | dateFormat: '{day} {month} в {hour}:{minute}' }}</span>
+        <p>{{ notification.content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div (click)="notificationVisibility = false" class="side-nav-backdrop"></div>

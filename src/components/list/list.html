@@ -1,0 +1,14 @@
+<div class="ticket">
+  <div class="ticket-title">
+    {{ title }}
+  </div>
+  <div class="list">
+    <div (click)="select(item)"
+       *ngFor="let item of items"
+       [class.notification]="item.notification"
+       [class.selected]="activeItem && activeItem.id == item.id"
+       class="item active">
+      {{ item.title }}
+    </div>
+  </div>
+</div>
